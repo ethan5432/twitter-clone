@@ -1,3 +1,5 @@
+import TweetInput from "./TweetInput";
+
 export default function Postfeed() {
   return (
     <div
@@ -10,7 +12,8 @@ export default function Postfeed() {
              border-gray-700 sticky top-0 z-50"
       >
         Home
-      </div>
+          </div>
+          <TweetInput />
       Feed
     </div>
   );
