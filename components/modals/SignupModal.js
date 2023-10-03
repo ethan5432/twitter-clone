@@ -1,4 +1,5 @@
 import Modal from "@mui/material/Modal"
+import { useState } from "react";
 export default function SignupModal() {
 
     const [isOpen, setIsOpen] = useState(false)
