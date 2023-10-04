@@ -9,7 +9,7 @@ import { auth } from "@/firebase";
 export default function SignupModal() {
 
 
-    const isOpen = useSelector(state => state.modals.signupModalOpen)
+    const isOpen = useSelector((state) => state.modals.signupModalOpen)
     const dispatch = useDispatch()
 
     const [email, setEmail] = useState("")
@@ -24,9 +24,18 @@ export default function SignupModal() {
     }
     
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (current) => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             if (!currentUser) return
             //handle redux actions
+            dispatch(
+              setUser({
+                username: currentUser.email.split("@")[0],
+                name: null,
+                email: currentUser.email,
+                uid: currentUser.uid,
+                photoUrl: null,
+              })
+            );
         })
 
         return unsubscribe
