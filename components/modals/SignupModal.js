@@ -1,11 +1,37 @@
 import { closeSignupModal, openSignupModal } from "@/Redux/modalSlice";
 import Modal from "@mui/material/Modal"
 import { useDispatch, useSelector } from "react-redux";
+import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { useEffect, useState } from "react";
+import { auth } from "@/firebase";
+
+
 export default function SignupModal() {
 
 
     const isOpen = useSelector(state => state.modals.signupModalOpen)
     const dispatch = useDispatch()
+
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    async function handleSignup() {
+        const userCredentials = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+    )
+    }
+    
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (current) => {
+            if (!currentUser) return
+            //handle redux actions
+        })
+
+        return unsubscribe
+    })
+
 
     return (
       <>
@@ -55,11 +81,13 @@ export default function SignupModal() {
                 placeholder="Email"
                 className="h-10 mt-8 rounded-md bg-transparent border border-gray-700 p-6"
                 type={"email"}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <input
                 placeholder="Password"
                 type={"password"}
                 className="h-10 mt-8 rounded-md bg-transparent border border-gray-700 p-6"
+                onChange={(e) => setPassword(e.target.value)}
               />
 
               <button
@@ -67,6 +95,7 @@ export default function SignupModal() {
                          font-bold
                          text-lg
                          p-2 mt-8 rounded-md"
+                            onClick={handleSignup}
               >
                 Create your account
               </button>
