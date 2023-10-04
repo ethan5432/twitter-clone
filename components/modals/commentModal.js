@@ -9,7 +9,7 @@ export default function CommentModal() {
     <>
           <Modal className="flex justify-center items-center"
               open={isOpen} onClose={() => dispatch(closeCommentModal())}>
-        <div className="text-white w-[500px] h-[500px]">
+        <div className="bg-white w-[500px] h-[500px]">
           This is the comment Modal
         </div>
       </Modal>
