@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 
+body{
+    background-color: black;
+}
+
 .hoverAnimation{
     @apply hover:cursor-pointer
      hover:bg-white 

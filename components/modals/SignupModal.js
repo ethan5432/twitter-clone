@@ -1,9 +1,11 @@
 import { closeSignupModal, openSignupModal } from "@/Redux/modalSlice";
 import Modal from "@mui/material/Modal"
 import { useDispatch, useSelector } from "react-redux";
-import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { auth } from "@/firebase";
+import { setUser } from "@/Redux/userSlice";
+import { useRouter } from "next/router";
 
 
 export default function SignupModal() {
@@ -13,15 +15,33 @@ export default function SignupModal() {
     const dispatch = useDispatch()
 
     const [email, setEmail] = useState("")
+    const [name, setName] = useState("")
     const [password, setPassword] = useState("")
+
+    const router = useRouter()
 
     async function handleSignup() {
         const userCredentials = await createUserWithEmailAndPassword(
             auth,
             email,
             password
-    )
+        )
+        
+        await updateProfile(auth.currentUser, {
+            displayName: name,
+            photoURL: `./public/assets/pfp${Math.ceil(Math.random() * 5)}.png`
+        })
+
+        router.reload()
     }
+
+     async function handleGuestSignIN() {
+       await signInWithEmailAndPassword(
+         auth,
+         "guest12345564576@gmail.com",
+         "123456"
+       );
+     }
     
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -30,10 +50,10 @@ export default function SignupModal() {
             dispatch(
               setUser({
                 username: currentUser.email.split("@")[0],
-                name: null,
+                name: currentUser.displayName,
                 email: currentUser.email,
                 uid: currentUser.uid,
-                photoUrl: null,
+                photoUrl: currentUser.photoURL,
               })
             );
         })
@@ -74,6 +94,7 @@ export default function SignupModal() {
                          font-bold
                          text-lg
                          p-2 rounded-md"
+                            onClick={handleGuestSignIN}
               >
                 Sign In as Guest
               </button>
@@ -85,6 +106,7 @@ export default function SignupModal() {
                 placeholder="Full Name"
                 className="h-10 mt-8 rounded-md bg-transparent border border-gray-700 p-6"
                 type={"text"}
+                onChange={(e) => setName(e.target.value)}
               />
               <input
                 placeholder="Email"
@@ -104,7 +126,7 @@ export default function SignupModal() {
                          font-bold
                          text-lg
                          p-2 mt-8 rounded-md"
-                            onClick={handleSignup}
+                onClick={handleSignup}
               >
                 Create your account
               </button>

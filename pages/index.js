@@ -4,11 +4,15 @@ import Sidebar from '@/components/Sidebar'
 import Postfeed from '@/components/Postfeed'
 import Trending from '@/components/Trending'
 import Banner from '@/components/Banner'
+import { useSelector } from 'react-redux'
 
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+
+  const username = useSelector(state => state.user.username)
+
   return (
     <div>
       <div
@@ -19,7 +23,7 @@ export default function Home() {
         <Postfeed />
         <Trending />
       </div>
-      <Banner/>
+      {!username && <Banner/>}
     </div>
   );
 }
