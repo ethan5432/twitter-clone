@@ -2,7 +2,7 @@ import { closeCommentModal } from "@/Redux/modalSlice";
 import Modal from "@mui/material/Modal";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function commentModal() {
+export default function CommentModal() {
   const isOpen = useSelector((state) => state.modals.commentModalOpen);
   const dispatch = useDispatch();
   return (
