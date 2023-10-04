@@ -16,7 +16,11 @@ export default function LoginModal() {
     }
 
    async function handleGuestSignIN() {
-        await signInWithEmailAndPassword(auth, "guest12345564576@gmail.com", "123456")
+        await signInWithEmailAndPassword(
+          auth,
+          "guest19036@gmail.com",
+          "PasswordGuest39?"
+        );
     }
 
   return (

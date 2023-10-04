@@ -1,3 +1,4 @@
+import { closeSignupModal } from "@/Redux/modalSlice";
 import { signOutUser } from "@/Redux/userSlice";
 import { auth } from "@/firebase";
 import {
@@ -27,6 +28,8 @@ export default function Sidebar() {
   
     await signOut(auth)
     dispatch(signOutUser())
+    dispatch(closeSignupModal())
+    dispatch(closeLoginModal())
 
 }
 
