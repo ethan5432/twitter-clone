@@ -3,7 +3,7 @@ import { addDoc, collection, doc, serverTimestamp, updateDoc } from "firebase/fi
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { auth, db, storage } from "@/firebase";
-import { ref } from "firebase/storage";
+import { ref, uploadString } from "firebase/storage";
 import { openLoginModal } from "@/Redux/modalSlice";
 
 export default function TweetInput() {
@@ -40,9 +40,11 @@ export default function TweetInput() {
       const imageRef = ref(storage, `tweetImages/${docRef.id}`)
       const uploadImage = await uploadString(imageRef, image, "data_url")
       const downloadURL = await getDownloadURL(imageRef)
-      await updateDoc(doc(db, "posts, docRef.id", {
-        image: downloadURL
-      }))
+      await updateDoc(
+        doc(db, "posts", docRef.id, {
+        image: downloadURL,
+      })
+      );
 }
 
 
