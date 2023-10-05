@@ -28,7 +28,7 @@ export default function TweetInput() {
     const docRef = await addDoc(collection(db, "posts"), {
       username: user.username,
       name: user.name,
-      photoUrl: user.photoUrl,
+      photoURL: user.photoURL,
       uid: user.uid,
       timestamp: serverTimestamp(),
       likes: [],
@@ -65,7 +65,7 @@ export default function TweetInput() {
     return (
       <div className="flex space-x-3 p-3 border-b border-gray-700">
         <img
-          src={user.photoUrl || "/public/twitter-logo.png"}
+          src={user.photoURL || "/public/twitter-logo.png"}
           className="w-11 h-11 rounded-full object-cover"
         />
 

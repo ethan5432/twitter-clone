@@ -8,7 +8,7 @@ const initialState = {
   commentTweetDetails: {
     id: null,
     tweet: null,
-    photoUrl: null,
+    photoURL: null,
     name: null,
     username: null,
 
@@ -44,7 +44,7 @@ const modalSlice = createSlice({
              state.commentTweetDetails.name = action.payload.name;
              state.commentTweetDetails.email = action.payload.email;
              state.commentTweetDetails.id = action.payload.id;
-             state.commentTweetDetails.photoUrl = action.payload.photoUrl;
+             state.commentTweetDetails.photoURL = action.payload.photoURL;
              state.commentTweetDetails.tweet = action.payload.tweet;
         }
   }

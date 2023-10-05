@@ -21,25 +21,27 @@ export default function SignupModal() {
     const router = useRouter()
 
     async function handleSignup() {
-        const userCredentials = await createUserWithEmailAndPassword(
-            auth,
-            email,
-            password
-        )
+      const userCredentials = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
         
-        await updateProfile(auth.currentUser, {
-            displayName: name,
-            photoURL: `./public/assets/pfp${Math.ceil(Math.random() * 5)}.png`
-        })
+      await updateProfile(auth.currentUser, {
+        displayName: name,
+        photoURL: `/assets/pfp${Math.ceil(
+          Math.random() * 5
+        )}.png`,
+      });
 
-        router.reload()
+      router.reload();
     }
 
      async function handleGuestSignIN() {
        await signInWithEmailAndPassword(
          auth,
-         "guest12345564576@gmail.com",
-         "123456"
+         "GuestEmail1290493728@gmail.com",
+         "GuestPassword"
        );
      }
     

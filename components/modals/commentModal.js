@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function CommentModal() {
   const isOpen = useSelector((state) => state.modals.commentModalOpen);
-  const userImg = useSelector((state) => state.user.photoUrl);
+  const userImg = useSelector((state) => state.user.photoURL);
   const TweetDetails = useSelector(state => state.modals.commentTweetDetails)
   const user = useSelector(state => state.user)
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ export default function CommentModal() {
       const commentDetails = {
         username: user.username,
         name: user.name,
-        photoUrl: user.photoUrl,
+        photoURL: user.photoURL,
         comment: comment
     }
     await updateDoc(docRef, {
@@ -61,7 +61,7 @@ router.push("/" + TweetDetails.id)
             <div className="flex space-x-3 w-full">
               <img
                 className="w-12 h-12 object-cover rounded-full"
-                src={TweetDetails.photoUrl}
+                src={TweetDetails.photoURL}
               />
               <div>
                 <div className="flex space-x-1.5">

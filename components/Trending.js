@@ -59,14 +59,29 @@ export default function Trending() {
           <div className="flex space-x-3">
             <img
               className="w-11 h-11 object-cover rounded-full"
-              src="https://media.licdn.com/dms/image/D4E03AQG3WoQjtQPalg/profile-displayphoto-shrink_400_400/0/1679269126837?e=1701907200&v=beta&t=b6i_9gVCV3JNNfr48yRXrWZE-rbHf-yPCFlOABiOJ2s"
+              src="/assets/pfp.png"/>
+            <div>
+              <div className="flex space-x-1">
+                <h1 className="font-bold">Elon Musk</h1>
+                <BadgeCheckIcon className="w-[18px] text-blue-400" />
+              </div>
+              <h1 className="text-[12] text-gray-500 mt-1">@MuskMan</h1>
+            </div>
+          </div>
+          <button className="bg-white text-black text-sm rounded-3xl font-bold w-20 h-8">Follow</button>
+        </div>
+        <div className="flex justify-between p-3">
+          <div className="flex space-x-3">
+            <img
+              className="w-11 h-11 object-cover rounded-full"
+              src="/assets/kylie.png"
             />
             <div>
               <div className="flex space-x-1">
-                <h1 className="font-bold">Ethan Nirenberg</h1>
+                <h1 className="font-bold">Kylie</h1>
                 <BadgeCheckIcon className="w-[18px] text-blue-400" />
               </div>
-              <h1 className="text-[12] text-gray-500 mt-1">@ethannirenberg</h1>
+              <h1 className="text-[12] text-gray-500 mt-1">@TheKylie</h1>
             </div>
           </div>
           <button className="bg-white text-black text-sm rounded-3xl font-bold w-20 h-8">Follow</button>
@@ -79,23 +94,7 @@ export default function Trending() {
             />
             <div>
               <div className="flex space-x-1">
-                <h1 className="font-bold">Ethan Nirenberg</h1>
-                <BadgeCheckIcon className="w-[18px] text-blue-400" />
-              </div>
-              <h1 className="text-[12] text-gray-500 mt-1">@ethannirenberg</h1>
-            </div>
-          </div>
-          <button className="bg-white text-black text-sm rounded-3xl font-bold w-20 h-8">Follow</button>
-        </div>
-        <div className="flex justify-between p-3">
-          <div className="flex space-x-3">
-            <img
-              className="w-11 h-11 object-cover rounded-full"
-              src="https://media.licdn.com/dms/image/D4E03AQG3WoQjtQPalg/profile-displayphoto-shrink_400_400/0/1679269126837?e=1701907200&v=beta&t=b6i_9gVCV3JNNfr48yRXrWZE-rbHf-yPCFlOABiOJ2s"
-            />
-            <div>
-              <div className="flex space-x-1">
-                <h1 className="font-bold">Ethan Nirenberg</h1>
+                <h1 className="font-bold">Ethan N</h1>
                 <BadgeCheckIcon className="w-[18px] text-blue-400" />
               </div>
               <h1 className="text-[12] text-gray-500 mt-1">@ethannirenberg</h1>

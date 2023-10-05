@@ -17,7 +17,7 @@ export async function getServerSideProps(context) {
   const formattedData = {
     username: data.username,
     name: data.name,
-    photoUrl: data.photoUrl,
+    photoURL: data.photoURL,
     text: data.tweet,
     comments: data.comments || null,
     timestamp: JSON.stringify(data.timestamp.toDate()),
@@ -60,7 +60,7 @@ export default function CommentsPage({ tweetData }) {
           <div className="border-b  border-gray-700">
             <div className="flex space-x-3 p-3 ">
               <img
-                src={tweetData.photoUrl}
+                src={tweetData.photoURL}
                 className="w-11 h-11 
             rounded-full object-cover"
               />
@@ -107,7 +107,7 @@ export default function CommentsPage({ tweetData }) {
           <div className="border-b  border-gray-700">
             <div className="flex space-x-3 p-3 ">
               <img
-                src={comment.photoUrl}
+                src={comment.photoURL}
                 className="w-11 h-11 
             rounded-full object-cover"
               />

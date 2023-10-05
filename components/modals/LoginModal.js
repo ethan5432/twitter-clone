@@ -13,7 +13,27 @@ export default function LoginModal() {
     
     async function handleSignIn() {
         await signInWithEmailAndPassword(auth, email, password)
+  }
+  
+  async function handleSignInButtonClick() {
+    try {
+      await handleSignIn();
+      // Sign-in successful; you can navigate to another page or perform other actions.
+    } catch (error) {
+      // Handle the sign-in error here
+      if (
+        error.code === "auth/user-not-found" ||
+        error.code === "auth/wrong-password"
+      ) {
+        // Display a user-friendly error message for incorrect email or password
+        alert("Incorrect email or password. Please try again.");
+      } else {
+        // Handle other possible authentication errors
+        console.error("Authentication Error:", error);
+        // You can display a general error message or take other actions as needed.
+      }
     }
+  }
 
    async function handleGuestSignIN() {
         await signInWithEmailAndPassword(
@@ -71,7 +91,7 @@ export default function LoginModal() {
                          font-bold
                          text-lg
                          p-2 mt-8 rounded-md"
-                          onClick={handleSignIn}
+              onClick={handleSignInButtonClick}
             >
               Sign in
             </button>
@@ -81,7 +101,7 @@ export default function LoginModal() {
                          font-bold
                          text-lg
                          p-2 rounded-md mt-8"
-                          onClick={handleGuestSignIN}
+              onClick={handleGuestSignIN}
             >
               Sign In as Guest
             </button>

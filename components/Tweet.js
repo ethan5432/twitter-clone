@@ -64,7 +64,7 @@ const user= useSelector(state => state.user)
         name={data?.name}
         timestamp={data?.timestamp?.toDate()}
         text={data?.tweet}
-        photoUrl={data?.photoUrl}
+        photoURL={data?.photoURL}
         image={data?.image}
       />
       <div className="p-3 ml-16 text-gray-500 flex space-x-14">
@@ -80,7 +80,7 @@ const user= useSelector(state => state.user)
               setCommentTweet({
                 id: id,
                 tweet: data?.tweet,
-                photoUrl: data?.photoUrl,
+                photoURL: data?.photoURL,
                 name: data?.name,
                 username: data?.username,
               })
@@ -108,11 +108,11 @@ const user= useSelector(state => state.user)
   );
 }
 
-export function TweetHeader({username, name, timestamp, text, photoUrl, image}) {
+export function TweetHeader({username, name, timestamp, text, photoURL, image}) {
     return (
       <div className="flex space-x-3 p-3 ">
         <img
-          src={photoUrl}
+          src={photoURL}
           className="w-11 h-11 
             rounded-full object-cover"
         />
