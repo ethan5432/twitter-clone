@@ -1,7 +1,8 @@
 import { closeCommentModal } from "@/Redux/modalSlice";
+import { db } from "@/firebase";
 import { CalendarIcon, ChartBarIcon, EmojiHappyIcon, LocationMarkerIcon, PhotographIcon, XIcon } from "@heroicons/react/outline";
 import Modal from "@mui/material/Modal";
-import { arrayUnion, updateDoc } from "firebase/firestore";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { comment } from "postcss";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +16,7 @@ export default function CommentModal() {
   const [comment, setComment] = useState("")
 
   async function sendComment() {
-    const docRef = doc(db, "posts", tweetDetails.id)
+    const docRef = doc(db, "posts", TweetDetails.id)
     const commentDetails = {
       username: user.username,
       name: user.name,
