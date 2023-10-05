@@ -1,9 +1,9 @@
-import { openCommentModal } from "@/Redux/modalSlice";
+import { openCommentModal, setCommentTweet } from "@/Redux/modalSlice";
 import { ChartBarIcon, ChatIcon, HeartIcon, UploadIcon } from "@heroicons/react/outline"
 import Moment from "react-moment";
 import { useDispatch } from "react-redux";
 
-export default function Tweet({ data }) {
+export default function Tweet({ data, id }) {
 
 const dispatch = useDispatch()
 
@@ -18,7 +18,18 @@ const dispatch = useDispatch()
       />
       <div className="p-3 ml-16 text-gray-500 flex space-x-14">
         <div
-        onClick={() => dispatch (openCommentModal())}
+          onClick={() => {
+            dispatch(
+              setCommentTweet({
+                id: id,
+                tweet: data?.tweet,
+                photoUrl: data?.photoUrl,
+                name: data?.name,
+                username: data?.username,
+              })
+            );
+            dispatch(openCommentModal())
+          }}
         >
           <ChatIcon className="w-5 cursor-pointer hover:text-green-400" />
         </div>
