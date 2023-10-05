@@ -1,7 +1,7 @@
 import { openCommentModal, openLoginModal, setCommentTweet } from "@/Redux/modalSlice";
 import { db } from "@/firebase";
 import { ChartBarIcon, ChatIcon, HeartIcon, TrashIcon, UploadIcon } from "@heroicons/react/outline"
-import { HeartIcon as Filled } from "@heroicons/react/solid";
+import { HeartIcon as FilledHeartIcon } from "@heroicons/react/solid";
 import { arrayRemove, deleteDoc, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -34,7 +34,7 @@ const user= useSelector(state => state.user)
     if (likes.includes(user.uid)) {
       await updateDoc(doc(db, "posts", id), {
         likes: arrayRemove(user.uid)
-      })
+      });
     } else {
       await updateDoc(doc(db, "posts", id), {
         likes: arrayUnion(user.uid)
@@ -44,15 +44,15 @@ const user= useSelector(state => state.user)
 
   useEffect(() => {
     
-if (!id) return
+    if (!id) return;
 
-    const unsubscribe = onSnapshot(doc(db, "posts", id), (doc) => () {
+    const unsubscribe = onSnapshot(doc(db, "posts", id), (doc) => {
       setLikes(doc.data()?.likes);
       setComments(doc.data()?.comments)
-    } )
-    return unsubscribe
+    });
+    return unsubscribe;
 
-  }, [])
+  }, []);
 
   return (
     <div
