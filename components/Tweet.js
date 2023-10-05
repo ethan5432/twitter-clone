@@ -1,9 +1,10 @@
-import { openCommentModal, setCommentTweet } from "@/Redux/modalSlice";
+import { openCommentModal, openLoginModal, setCommentTweet } from "@/Redux/modalSlice";
 import { db } from "@/firebase";
-import { ChartBarIcon, ChatIcon, HeartIcon, UploadIcon } from "@heroicons/react/outline"
-import { doc, onSnapshot, updateDoc } from "firebase/firestore";
+import { ChartBarIcon, ChatIcon, HeartIcon, TrashIcon, UploadIcon } from "@heroicons/react/outline"
+import { HeartIcon as Filled } from "@heroicons/react/solid";
+import { arrayRemove, deleteDoc, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Moment from "react-moment";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -14,17 +15,42 @@ export default function Tweet({ data, id }) {
 
 const user= useSelector(state => state.user)
 
+  const [likes, setLikes] = useState([])
+  const [comments, setComments] = useState([])
+
+  async function deleteTweet(e) {
+    e.stopPropagation()
+    await deleteDoc(doc(db, "posts", id))
+  }
+  
   async function likeComment(e) {
-     e.stopPropagation();
-    await updateDoc(doc(db, "posts", id), {
-      likes: arrayUnion(user.uid)
-    })
+    e.stopPropagation();
+
+    if (!user.username) {
+      dispatch(openLoginModal())
+      return
+    }
+    
+    if (likes.includes(user.uid)) {
+      await updateDoc(doc(db, "posts", id), {
+        likes: arrayRemove(user.uid)
+      })
+    } else {
+      await updateDoc(doc(db, "posts", id), {
+        likes: arrayUnion(user.uid)
+      })
+    }
   }
 
   useEffect(() => {
     
-    const unsubscribe = onSnapshot(doc(db, "posts", id ))
-    
+if (!id) return
+
+    const unsubscribe = onSnapshot(doc(db, "posts", id), (doc) => () {
+      setLikes(doc.data()?.likes);
+      setComments(doc.data()?.comments)
+    } )
+    return unsubscribe
 
   }, [])
 
@@ -39,11 +65,17 @@ const user= useSelector(state => state.user)
         timestamp={data?.timestamp?.toDate()}
         text={data?.tweet}
         photoUrl={data?.photoUrl}
+        imaeg={data?.image}
       />
       <div className="p-3 ml-16 text-gray-500 flex space-x-14">
-        <div
+        <div className="flex justify-center items-center space-x-2"
           onClick={(e) => {
+
             e.stopPropagation();
+             if (!user.username) {
+      dispatch(openLoginModal())
+      return
+    }
             dispatch(
               setCommentTweet({
                 id: id,
@@ -57,12 +89,18 @@ const user= useSelector(state => state.user)
           }}
         >
           <ChatIcon className="w-5 cursor-pointer hover:text-green-400" />
+          {comments?.length > 0 && <span>{comments.length}</span>}
         </div>
-        <div
-        onClick={likeComment}
+        <div className="flex justify-center items-center space-x-2"
+          onClick={likeComment}
         >
-          <HeartIcon className="w-5 cursor-pointer hover:text-pink-400" />
+          {likes.includes(user.uid) ? <FilledHeartIcon className="w-5 text-pink-500"/> : <HeartIcon className="w-5 cursor-pointer hover:text-pink-400" />}
+          {likes.length > 0 && <span>{likes.length}</span>}
         </div>
+        {user.uid === data?.uid && (<div className="cursor-pointer hover:text-red-600"
+        onClick={deleteTweet}>
+          <TrashIcon className="w-5"/>
+        </div>)}
         <ChartBarIcon className="w-5 cursor-not-allowed hover:text-green-400" />
         <UploadIcon className="w-5 cursor-not-allowed hover:text-green-400" />
       </div>
@@ -70,7 +108,7 @@ const user= useSelector(state => state.user)
   );
 }
 
-export function TweetHeader({username, name, timestamp, text, photoUrl}) {
+export function TweetHeader({username, name, timestamp, text, photoUrl, image}) {
     return (
       <div className="flex space-x-3 p-3 ">
         <img
@@ -89,6 +127,8 @@ export function TweetHeader({username, name, timestamp, text, photoUrl}) {
             </Moment>
           </div>
           <span>{text}</span>
+          {image && <img className="object-cover border border-gray-700
+           rounded-md mt-3 max-h-80" src={image} />}
         </div>
       </div>
     );
