@@ -1,4 +1,4 @@
-import { closeSignupModal } from "@/Redux/modalSlice";
+import { closeLoginModal, closeSignupModal } from "@/Redux/modalSlice";
 import { signOutUser } from "@/Redux/userSlice";
 import { auth } from "@/firebase";
 import {

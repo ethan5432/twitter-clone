@@ -117,7 +117,7 @@ export default function CommentsPage({ tweetData }) {
                   <span>@{comment.username}</span>
                   <div className="w-1 h-1 border border-gray-500 rounded-full"></div>
 
-                  <Moment fromNow>{JSON.parse(comment.timestamp)}</Moment>
+                  
                 </div>
                 <span className="text-2xl">{comment.comment}</span>
               </div>

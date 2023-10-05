@@ -2,7 +2,7 @@ import { openCommentModal, openLoginModal, setCommentTweet } from "@/Redux/modal
 import { db } from "@/firebase";
 import { ChartBarIcon, ChatIcon, HeartIcon, TrashIcon, UploadIcon } from "@heroicons/react/outline"
 import { HeartIcon as FilledHeartIcon } from "@heroicons/react/solid";
-import { arrayRemove, deleteDoc, doc, onSnapshot, updateDoc } from "firebase/firestore";
+import { arrayRemove, arrayUnion, deleteDoc, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Moment from "react-moment";
@@ -65,7 +65,7 @@ const user= useSelector(state => state.user)
         timestamp={data?.timestamp?.toDate()}
         text={data?.tweet}
         photoUrl={data?.photoUrl}
-        imaeg={data?.image}
+        image={data?.image}
       />
       <div className="p-3 ml-16 text-gray-500 flex space-x-14">
         <div className="flex justify-center items-center space-x-2"
