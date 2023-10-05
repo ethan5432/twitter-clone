@@ -45,23 +45,23 @@ export default function SignupModal() {
        );
      }
     
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            if (!currentUser) return
-            //handle redux actions
-            dispatch(
-              setUser({
-                username: currentUser.email.split("@")[0],
-                name: currentUser.displayName,
-                email: currentUser.email,
-                uid: currentUser.uid,
-                photoUrl: currentUser.photoURL,
-              })
-            );
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (!currentUser) return
+      //handle redux actions
+      dispatch(
+        setUser({
+          username: currentUser.email.split("@")[0],
+          name: currentUser.displayName,
+          email: currentUser.email,
+          uid: currentUser.uid,
+          photoUrl: currentUser.photoURL,
         })
-
-        return unsubscribe
+      );
     })
+
+    return unsubscribe
+  });
 
 
     return (
