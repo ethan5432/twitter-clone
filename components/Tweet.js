@@ -1,18 +1,38 @@
 import { openCommentModal, setCommentTweet } from "@/Redux/modalSlice";
+import { db } from "@/firebase";
 import { ChartBarIcon, ChatIcon, HeartIcon, UploadIcon } from "@heroicons/react/outline"
+import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import Moment from "react-moment";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Tweet({ data, id }) {
 
   const dispatch = useDispatch()
   const router = useRouter()
 
+const user= useSelector(state => state.user)
+
+  async function likeComment(e) {
+     e.stopPropagation();
+    await updateDoc(doc(db, "posts", id), {
+      likes: arrayUnion(user.uid)
+    })
+  }
+
+  useEffect(() => {
+    
+    const unsubscribe = onSnapshot(doc(db, "posts", id ))
+    
+
+  }, [])
+
   return (
     <div
-    onClick={() => router.push("/" + id)}
-      className="border-b cursor-pointer border-gray-700">
+      onClick={() => router.push("/" + id)}
+      className="border-b cursor-pointer border-gray-700"
+    >
       <TweetHeader
         username={data?.username}
         name={data?.name}
@@ -23,7 +43,7 @@ export default function Tweet({ data, id }) {
       <div className="p-3 ml-16 text-gray-500 flex space-x-14">
         <div
           onClick={(e) => {
-            e.stopPropagation()
+            e.stopPropagation();
             dispatch(
               setCommentTweet({
                 id: id,
@@ -33,12 +53,16 @@ export default function Tweet({ data, id }) {
                 username: data?.username,
               })
             );
-            dispatch(openCommentModal())
+            dispatch(openCommentModal());
           }}
         >
           <ChatIcon className="w-5 cursor-pointer hover:text-green-400" />
         </div>
-        <HeartIcon className="w-5 cursor-pointer hover:text-pink-400" />
+        <div
+        onClick={likeComment}
+        >
+          <HeartIcon className="w-5 cursor-pointer hover:text-pink-400" />
+        </div>
         <ChartBarIcon className="w-5 cursor-not-allowed hover:text-green-400" />
         <UploadIcon className="w-5 cursor-not-allowed hover:text-green-400" />
       </div>

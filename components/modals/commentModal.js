@@ -3,6 +3,7 @@ import { db } from "@/firebase";
 import { CalendarIcon, ChartBarIcon, EmojiHappyIcon, LocationMarkerIcon, PhotographIcon, XIcon } from "@heroicons/react/outline";
 import Modal from "@mui/material/Modal";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { useRouter } from "next/router";
 import { comment } from "postcss";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +15,7 @@ export default function CommentModal() {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch();
   const [comment, setComment] = useState("")
+  const router = useRouter()
 
   async function sendComment() {
     const docRef = doc(db, "posts", TweetDetails.id)
@@ -26,6 +28,9 @@ export default function CommentModal() {
     await updateDoc(docRef, {
       comments: arrayUnion(commentDetails)
     })
+
+    dispatch(closeCommentModal())
+router.push("/" + TweetDetails.id)
 }
 
 
