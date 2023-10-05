@@ -18,14 +18,12 @@ export default function CommentModal() {
   const router = useRouter()
 
   async function sendComment() {
-    // if (TweetDetails && TweetDetails.id) {
       const docRef = doc(db, "posts", TweetDetails.id)
       const commentDetails = {
         username: user.username,
         name: user.name,
         photoUrl: user.photoUrl,
         comment: comment
-      // }
     }
     await updateDoc(docRef, {
       comments: arrayUnion(commentDetails)
