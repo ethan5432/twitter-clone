@@ -88,7 +88,7 @@ export default function CommentsPage({ tweetData }) {
             <div className="flex justify-center items-center p-1 space-x-2">
               <img
                 className="w-12 h-12 rounded-full object-cover"
-                src={user.photoUrl}
+                src={user.photoURL}
               />
               <h1 className="text-2xl text-gray-500">Tweet your reply</h1>
             </div>

@@ -28,27 +28,27 @@ export default function Trending() {
         </div>
         <div className="p-3 relative">
           <DotsHorizontalIcon className="w-5 text-gray-600 absolute right-4" />
-          <p className="text-xs text-gray-500">Trending in US</p>
-          <h1 className="text-[15px] font-bold">China</h1>
-          <p className="text-xs text-gray-500">340k Tweets</p>
+          <p className="text-xs text-gray-500">Trending in Israel</p>
+          <h1 className="text-[15px] font-bold">Tech in Tel Aviv</h1>
+          <p className="text-xs text-gray-500">100k Tweets</p>
         </div>
         <div className="p-3 relative">
           <DotsHorizontalIcon className="w-5 text-gray-600 absolute right-4" />
           <p className="text-xs text-gray-500">Trending in US</p>
-          <h1 className="text-[15px] font-bold">China</h1>
-          <p className="text-xs text-gray-500">340k Tweets</p>
+          <h1 className="text-[15px] font-bold">SuperBowl</h1>
+          <p className="text-xs text-gray-500">2.3M Tweets</p>
         </div>
         <div className="p-3 relative">
           <DotsHorizontalIcon className="w-5 text-gray-600 absolute right-4" />
-          <p className="text-xs text-gray-500">Trending in US</p>
-          <h1 className="text-[15px] font-bold">China</h1>
-          <p className="text-xs text-gray-500">340k Tweets</p>
+          <p className="text-xs text-gray-500">Trending in Japan</p>
+          <h1 className="text-[15px] font-bold">Anime</h1>
+          <p className="text-xs text-gray-500">5m Tweets</p>
         </div>
         <div className="p-3 relative">
           <DotsHorizontalIcon className="w-5 text-gray-600 absolute right-4" />
-          <p className="text-xs text-gray-500">Trending in US</p>
-          <h1 className="text-[15px] font-bold">China</h1>
-          <p className="text-xs text-gray-500">340k Tweets</p>
+          <p className="text-xs text-gray-500">Trending in France</p>
+          <h1 className="text-[15px] font-bold">World Cup</h1>
+          <p className="text-xs text-gray-500">12M Tweets</p>
         </div>
       </div>
 

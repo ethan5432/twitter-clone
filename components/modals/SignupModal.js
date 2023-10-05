@@ -55,7 +55,7 @@ export default function SignupModal() {
           name: currentUser.displayName,
           email: currentUser.email,
           uid: currentUser.uid,
-          photoUrl: currentUser.photoURL,
+          photoURL: currentUser.photoURL,
         })
       );
     })
